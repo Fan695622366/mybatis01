@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 
+  		通过mapper来配置映射信息
+  		namespace是命名空间,必须保证唯一
+  
+   -->
+ <mapper namespace="b_dynamic_crud.entity.User">
+ 
+ 		<!--
+ 			映射实体类与数据库表中匹配关系. 比如:User类中的id属性,就比配user表中的id字段  
+ 			
+ 			type属性:表示的是实体类的全名称[需要映射的实体类],因为我们在mybatis-config.xml中取了别名
+ 			所以可以直接使用user
+ 			
+ 			id属性:是实体类与表映射关系的唯一标识
+ 			
+ 			autoMapping:是否自动映射.[默认值是true]
+ 		-->
+ 		<resultMap type="user" id="user" autoMapping="true">
+ 			
+ 			<!--
+ 				id标签:用来映射主键.
+ 				
+ 				result标签:用来映射非主键
+ 				
+ 				property属性:映射实体类中的属性名称
+ 				column属性:映射数据表中的字段
+ 			  -->
+ 			<id property="id" column="id"/>
+ 			<result property="username" column="username"/>
+ 			<result property="password" column="password"/>
+ 			<result property="salary" column="salary"/>
+ 			
+ 		</resultMap>
+ 		
+ 		<select id="findUserByCondition" parameterType="java.util.Map" resultMap="user">
+ 			select id,username,password,salary from user
+ 			<!-- 
+ 				where后面跟的是查询时需要的条件.
+ 				在这里,如果没有满足的条件,则查询所有.
+ 				如果有满足的条件,则根据条件查询
+ 					sql语句为:select id,username,password,salary from user where 条件;
+ 			 -->
+ 			
+ 			<where>
+ 				<!--
+ 					sql语句为:select id,username,password,salary from user where id=?
+ 				  -->
+ 				<if test="id!=null">
+ 				 	and	id = #{id}
+ 				</if>
+ 				
+ 				<if test="username!=null">
+ 					and username=#{username}
+ 				</if>
+ 				
+ 				<if test="password!=null">
+ 					and password=#{password}
+ 				</if>
+ 				
+ 				<if test="salary!=null">
+ 					and salary=#{salary}
+ 				</if>
+ 			</where>
+ 		</select>
+ 		<!--
+ 			更新user
+ 		  -->
+ 		<update id="updateUser" parameterType="java.util.Map">
+ 			update user
+ 			<set>
+ 				<if test="username!=null">
+ 					username = #{username},
+ 				</if>
+ 				
+ 				<if test="password!=null">
+ 					password = #{password},
+ 				</if>
+ 			
+ 				<if test="salary!=null">
+ 					salary = #{salary}
+ 				</if>
+ 			</set>
+ 			where id = #{id}
+ 		</update>
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 
+ 
+ </mapper>

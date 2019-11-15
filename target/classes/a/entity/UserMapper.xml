@@ -49,7 +49,7 @@
 			id:要执行该sql语句的唯一标示
 		-->
 		<insert id="addUser1">
-			insert into user(id,username,password,salary) values(1,"siri","siri123",11.11)
+			insert into user(id,username,password,salary) values(4,"siri","siri123",11.11)
 		</insert>
 	
    

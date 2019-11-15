@@ -1,10 +1,8 @@
 package a.test;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import a.dao.UserDao;
-import util.MybatisUtil;
 
 public class testUserDao {
 

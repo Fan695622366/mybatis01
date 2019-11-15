@@ -21,7 +21,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="a.entity.User" alias="user"/> -->
 		
-		<typeAlias type="a.entity.User" alias="user"/>
+		<typeAlias type="b_dynamic_crud.entity.User" alias="user"/>
 	</typeAliases>
 	
 	<!-- 
@@ -128,7 +128,7 @@
 	 </environments>
 	 <mappers>
 	 	<!--使用resource属性加载mapper的xml文件  -->
-	 	<mapper resource="a/entity/UserMapper.xml"/>
+	 	<mapper resource="b_dynamic_crud/entity/UserMapper.xml"/>
 	 </mappers>
 	
 	
